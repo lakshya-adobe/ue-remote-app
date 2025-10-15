@@ -45,3 +45,6 @@ Thumbs.db
 /.vscode/launch.json
 /.vscode/tasks.json
 /package-lock.json
+
+# SSL certificates
+/ssl/*.pem
