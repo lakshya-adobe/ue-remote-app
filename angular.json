@@ -63,7 +63,9 @@
           "options": {
             "ssl": true,
             "sslCert": "ssl/cert.pem",
-            "sslKey": "ssl/key.pem"
+            "sslKey": "ssl/key.pem",
+            "proxyConfig": "proxy.conf.json",
+            "port": 3000
           },
           "configurations": {
             "production": {

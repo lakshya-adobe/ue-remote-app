@@ -5,14 +5,25 @@ import { environment } from '../../environments/environment';
  * This function dynamically updates the meta tags with values from environment
  */
 export function configureUniversalEditor() {
+  // Validate environment variables
+  if (!environment.aemUrl || !environment.ueServiceUrl) {
+    console.error('Universal Editor configuration failed: Missing environment variables', {
+      aemUrl: environment.aemUrl,
+      ueServiceUrl: environment.ueServiceUrl
+    });
+    return;
+  }
+
   // Update AEM connection meta tag
   const aemConnectionMeta = document.querySelector('meta[name="urn:adobe:aue:system:aemconnection"]');
+  const connectionValue = `aem:${environment.aemUrl}`;
+
   if (aemConnectionMeta) {
-    aemConnectionMeta.setAttribute('content', `aem:${environment.aemUrl}`);
+    aemConnectionMeta.setAttribute('content', connectionValue);
   } else {
     const meta = document.createElement('meta');
     meta.setAttribute('name', 'urn:adobe:aue:system:aemconnection');
-    meta.setAttribute('content', `aem:${environment.aemUrl}`);
+    meta.setAttribute('content', connectionValue);
     document.head.appendChild(meta);
   }
 
@@ -27,9 +38,8 @@ export function configureUniversalEditor() {
     document.head.appendChild(meta);
   }
 
-  console.log('Universal Editor configured with:', {
-    aemUrl: environment.aemUrl,
-    ueServiceUrl: environment.ueServiceUrl
+  console.log('Universal Editor configured successfully:', {
+    connection: connectionValue,
+    service: environment.ueServiceUrl
   });
 }
-

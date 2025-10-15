@@ -1,0 +1,11 @@
+<main *ngIf="pageData"
+      [attr.data-aue-resource]="'urn:aemconnection:' + pageData._path + '/jcr:content/data/master'"
+      [attr.data-aue-type]="'reference'"
+      [attr.data-aue-label]="'Page (Home)'">
+
+  <app-hero
+    [image]="heroImage"
+    [title]="heroTitle"
+    [content]="heroContent"
+  ></app-hero>
+</main>

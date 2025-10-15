@@ -7,11 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <script src="https://universal-editor-service.adobe.io/cors.js" async></script>
+  <script src="https://universal-editor-service.adobe.io/cors.js" defer></script>
 
   <!-- Universal Editor Connection - Values set dynamically from environment -->
-  <meta name="urn:adobe:aue:system:aemconnection" content="">
-  <meta name="urn:adobe:aue:config:service" content="">
+  <meta name="urn:adobe:aue:config:service" content="https://localhost:8000">
+  <meta name="urn:adobe:aue:system:aemconnection" content="aem:https://localhost:8443">
+
+  <!-- Universal Editor Definitions (served from /public → / at runtime) -->
+  <link rel="aue:definition:component" href="/static/component-definition.json">
+  <link rel="aue:definition:filter" href="/static/filter-definition.json">
 
 </head>
 <body>

@@ -1,0 +1,20 @@
+{
+  "/content/**": {
+    "target": "https://localhost:8443",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "headers": {
+      "Authorization": "Basic YWRtaW46YWRtaW4="
+    }
+  },
+  "/graphql/**": {
+    "target": "https://localhost:8443",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "headers": {
+      "Authorization": "Basic YWRtaW46YWRtaW4="
+    }
+  }
+}
