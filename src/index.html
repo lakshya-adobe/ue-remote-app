@@ -17,6 +17,83 @@
   <link rel="aue:definition:component" href="/static/component-definition.json">
   <link rel="aue:definition:filter" href="/static/filter-definition.json">
 
+  <script type="application/vnd.adobe.aue.component+json">
+    {
+      "groups": [
+        {
+          "title": "General Components",
+          "id": "general",
+          "components": [
+            {
+              "title": "Teaser",
+              "id": "teaser",
+              "plugins": {
+                "aem": {
+                  "page": {
+                    "resourceType": "wknd/components/teaser"
+                  }
+                }
+              }
+            },
+            {
+              "title": "Title",
+              "id": "title",
+              "plugins": {
+                "aem": {
+                  "page": {
+                    "resourceType": "wknd/components/title"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  </script>
+
+  <script type="application/vnd.adobe.aue.model+json">
+    [
+      {
+        "id": "teaser",
+        "fields": [
+          {
+            "component": "text-input",
+            "name": "jcr:title",
+            "label": "Title",
+            "valueType": "string"
+          },
+          {
+            "component": "text-area",
+            "name": "jcr:description",
+            "label": "Description",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "id": "title",
+        "fields": [
+          {
+            "component": "select",
+            "name": "type",
+            "value": "h1",
+            "label": "Type",
+            "valueType": "string",
+            "options": [
+              { "name": "h1", "value": "h1" },
+              { "name": "h2", "value": "h2" },
+              { "name": "h3", "value": "h3" },
+              { "name": "h4", "value": "h4" },
+              { "name": "h5", "value": "h5" },
+              { "name": "h6", "value": "h6" }
+            ]
+          }
+        ]
+      }
+    ]
+  </script>
+
 </head>
 <body>
   <app-root></app-root>

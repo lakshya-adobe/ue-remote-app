@@ -8,4 +8,17 @@
     [title]="heroTitle"
     [content]="heroContent"
   ></app-hero>
+
+  <app-container
+    [resource]="'urn:aemconnection:' + pageData._path + '/jcr:content/data/master/featuredServices'"
+    type="container"
+    label="Featured Services"
+    filter="content-fragments"
+    className="featured-services-container">
+    <!-- Components added from Universal Editor will appear here -->
+    <div *ngFor="let service of pageData.featuredServices" class="service-item">
+      <h3>{{ service.title }}</h3>
+      <p>{{ service.description?.plaintext }}</p>
+    </div>
+  </app-container>
 </main>

@@ -2,11 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 import { HeroComponent } from '../components/hero/hero.component';
+import { ContainerComponent } from '../components/base/container.component';
 import { AemHeadlessService, PageData } from '../services/aem-headless.service';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, HeroComponent],
+  imports: [CommonModule, HeroComponent, ContainerComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
