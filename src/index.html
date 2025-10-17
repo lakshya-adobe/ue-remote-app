@@ -14,84 +14,90 @@
   <meta name="urn:adobe:aue:system:aemconnection" content="aem:https://localhost:8443">
 
   <!-- Universal Editor Definitions (served from /public → / at runtime) -->
-  <link rel="aue:definition:component" href="/static/component-definition.json">
-  <link rel="aue:definition:filter" href="/static/filter-definition.json">
+<!--  <script type="application/aue:definition:component+json" src="/static/component-definition.json"></script>-->
+<!--  <script type="application/aue:definition:filter+json" src="/static/filter-definition.json"></script>-->
 
-  <script type="application/vnd.adobe.aue.component+json">
-    {
-      "groups": [
-        {
-          "title": "General Components",
-          "id": "general",
-          "components": [
-            {
-              "title": "Teaser",
-              "id": "teaser",
-              "plugins": {
-                "aem": {
-                  "page": {
-                    "resourceType": "wknd/components/teaser"
-                  }
-                }
-              }
-            },
-            {
-              "title": "Title",
-              "id": "title",
-              "plugins": {
-                "aem": {
-                  "page": {
-                    "resourceType": "wknd/components/title"
+<script type="application/vnd.adobe.aue.component+json">
+  {
+    "groups": [
+      {
+        "title": "Content Fragments",
+        "id": "content-fragments",
+        "components": [
+          {
+            "title": "Page",
+            "id": "page",
+            "plugins": {
+              "aem": {
+                "cf": {
+                  "name": "page",
+                  "cfModel": "/conf/securbank/settings/dam/cfm/models/page",
+                  "cfFolder": "/content/dam/securbank/pages",
+                  "title": "Page",
+                  "template": {
+                    "title": "New Page",
+                    "slug": "new-page"
                   }
                 }
               }
             }
-          ]
-        }
-      ]
-    }
-  </script>
-
-  <script type="application/vnd.adobe.aue.model+json">
-    [
-      {
-        "id": "teaser",
-        "fields": [
-          {
-            "component": "text-input",
-            "name": "jcr:title",
-            "label": "Title",
-            "valueType": "string"
           },
           {
-            "component": "text-area",
-            "name": "jcr:description",
-            "label": "Description",
-            "valueType": "string"
-          }
-        ]
-      },
-      {
-        "id": "title",
-        "fields": [
+            "title": "Article",
+            "id": "article",
+            "plugins": {
+              "aem": {
+                "cf": {
+                  "name": "article",
+                  "cfModel": "/conf/securbank/settings/dam/cfm/models/article",
+                  "cfFolder": "/content/dam/securbank/pages/articles",
+                  "title": "Article",
+                  "template": {
+                    "title": "New Article",
+                    "slug": "new-article",
+                    "image": "/content/dam/securbank/services/default-service-illustration.jpg"
+                  }
+                }
+              }
+            }
+          },
           {
-            "component": "select",
-            "name": "type",
-            "value": "h1",
-            "label": "Type",
-            "valueType": "string",
-            "options": [
-              { "name": "h1", "value": "h1" },
-              { "name": "h2", "value": "h2" },
-              { "name": "h3", "value": "h3" },
-              { "name": "h4", "value": "h4" },
-              { "name": "h5", "value": "h5" },
-              { "name": "h6", "value": "h6" }
-            ]
+            "title": "Service",
+            "id": "service",
+            "plugins": {
+              "aem": {
+                "cf": {
+                  "name": "service",
+                  "cfModel": "/conf/securbank/settings/dam/cfm/models/service",
+                  "cfFolder": "/content/dam/securbank/services",
+                  "title": "Service",
+                  "template": {
+                    "title": "New Service",
+                    "slug": "new-service",
+                    "icon": "/content/dam/securbank/services/default-service-illustration.jpg"
+                  }
+                }
+              }
+            }
           }
         ]
       }
     ]
+  }
+</script>
+
+  <script type="application/vnd.adobe.aue.model+json">
+    [
+      {
+        "id": "featured-services",
+        "components": ["service"]
+      },
+      {
+        "id": "related-articles",
+        "components": ["article"]
+      }
+    ]
+
   </script>
 
 </head>

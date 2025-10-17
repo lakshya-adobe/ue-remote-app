@@ -5,6 +5,24 @@
       "id": "content-fragments",
       "components": [
         {
+          "title": "Page",
+          "id": "page",
+          "plugins": {
+            "aem": {
+              "cf": {
+                "name": "page",
+                "cfModel": "/conf/securbank/settings/dam/cfm/models/page",
+                "cfFolder": "/content/dam/securbank/pages",
+                "title": "Page",
+                "template": {
+                  "title": "New Page",
+                  "slug": "new-page"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Article",
           "id": "article",
           "plugins": {
