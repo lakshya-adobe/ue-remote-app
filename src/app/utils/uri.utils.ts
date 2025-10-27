@@ -5,7 +5,6 @@ import { environment } from '../../environments/environment';
  * Matches React's getURI implementation
  */
 export function getURI(path: string = ''): string {
-  // In Angular, we'll use environment variables similar to React
   const serviceURL = environment.useProxy ? '/' : environment.hostUri;
   return serviceURL + path;
 }

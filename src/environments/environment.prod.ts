@@ -1,15 +1,34 @@
-export const environment = {
+import { EnvironmentProviders } from '@angular/core';
+import { generatedEnvironment } from './environment.generated';
+import {
+  EnvironmentConfig,
+  EnvironmentOverrides,
+  ENVIRONMENT_TOKEN,
+  finalizeEnvironment,
+  provideEnvironment
+} from './environment.model';
+
+const overrides = (generatedEnvironment || {}) as EnvironmentOverrides;
+
+export const environment: EnvironmentConfig = finalizeEnvironment({
   production: true,
-  aemUrl: 'https://localhost:8443',
-  aemGraphqlEndpoint: 'https://localhost:8443/graphql/execute.json',
-  graphqlEndpoint: '/graphql/execute.json',
-  graphqlProject: 'securbank',
-  ueServiceUrl: 'https://localhost:8000',
-  corsOrigin: 'https://experience.adobe.com',
-  localDevUrl: 'https://localhost:3000',
-  hostUri: 'https://localhost:8443',
-  useProxy: true,
-  authMethod: 'basic',
-  basicAuthUser: 'admin',
-  basicAuthPass: 'admin'
-};
+  hostUri: overrides.hostUri,
+  aemUrl: overrides.aemUrl,
+  graphqlEndpoint: overrides.graphqlEndpoint,
+  graphqlProject: overrides.graphqlProject,
+  siteName: overrides.siteName,
+  ueServiceUrl: overrides.ueServiceUrl,
+  corsOrigin: overrides.corsOrigin,
+  localDevUrl: overrides.localDevUrl,
+  repoTemplateUrl: overrides.repoTemplateUrl,
+  useProxy: overrides.useProxy,
+  authMethod: overrides.authMethod,
+  basicAuthUser: overrides.basicAuthUser,
+  basicAuthPass: overrides.basicAuthPass,
+  aemGraphqlEndpoint: overrides.aemGraphqlEndpoint
+});
+
+export const environmentProviders: EnvironmentProviders = provideEnvironment(environment);
+
+export { ENVIRONMENT_TOKEN };
+export type { EnvironmentConfig };

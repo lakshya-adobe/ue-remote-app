@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { Inject, Injectable } from '@angular/core';
+import { ENVIRONMENT_TOKEN, EnvironmentConfig } from '../../environments/environment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -7,33 +7,33 @@ import { environment } from '../../environments/environment';
 export class UniversalEditorService {
 
   // AEM Configuration
+  constructor(@Inject(ENVIRONMENT_TOKEN) private env: EnvironmentConfig) {
+    console.log('Universal Editor Service initialized');
+    console.log('AEM URL:', this.env.aemUrl);
+    console.log('UE Service URL:', this.env.ueServiceUrl);
+  }
+
   get aemUrl(): string {
-    return environment.aemUrl;
+    return this.env.aemUrl;
   }
 
   get aemGraphqlEndpoint(): string {
-    return environment.aemGraphqlEndpoint;
+    return this.env.aemGraphqlEndpoint;
   }
 
   // Universal Editor Service
   get ueServiceUrl(): string {
-    return environment.ueServiceUrl;
+    return this.env.ueServiceUrl;
   }
 
   // CORS Configuration
   get corsOrigin(): string {
-    return environment.corsOrigin;
+    return this.env.corsOrigin;
   }
 
   // Local Development URL
   get localDevUrl(): string {
-    return environment.localDevUrl;
-  }
-
-  constructor() {
-    console.log('Universal Editor Service initialized');
-    console.log('AEM URL:', this.aemUrl);
-    console.log('UE Service URL:', this.ueServiceUrl);
+    return this.env.localDevUrl;
   }
 
   /**

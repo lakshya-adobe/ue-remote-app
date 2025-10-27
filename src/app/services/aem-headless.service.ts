@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { environment } from '../../environments/environment';
+import { ENVIRONMENT_TOKEN, EnvironmentConfig } from '../../environments/environment.model';
 
 export interface GraphQLResponse<T> {
   data: T;
@@ -39,9 +39,12 @@ export interface PageListResponse {
 export class AemHeadlessService {
   private serviceURL: string;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    @Inject(ENVIRONMENT_TOKEN) private env: EnvironmentConfig
+  ) {
     // When using proxy, serviceURL should be empty string, not '/'
-    this.serviceURL = environment.useProxy ? '' : environment.hostUri;
+    this.serviceURL = this.env.useProxy ? '' : this.env.hostUri;
   }
 
   /**
@@ -52,8 +55,8 @@ export class AemHeadlessService {
       'Content-Type': 'application/json',
     });
 
-    if (environment.authMethod === 'basic') {
-      const credentials = btoa(`${environment.basicAuthUser}:${environment.basicAuthPass}`);
+    if (this.env.authMethod === 'basic') {
+      const credentials = btoa(`${this.env.basicAuthUser}:${this.env.basicAuthPass}`);
       headers = headers.set('Authorization', `Basic ${credentials}`);
     }
 
@@ -70,7 +73,7 @@ export class AemHeadlessService {
     queryParameters?: any
   ): Observable<T> {
     // Build the query URL using AEM's persisted query format
-    let queryURL = `${this.serviceURL}/graphql/execute.json/${project}/${queryName}`;
+    let queryURL = `${this.serviceURL}${this.env.graphqlEndpoint}/${project}/${queryName}`;
 
     // Add query parameters using semicolon separator (AEM format)
     if (queryParameters) {
@@ -103,7 +106,7 @@ export class AemHeadlessService {
 
     // Use the correct project name and query name
     return this.runPersistedQuery<PageListResponse>(
-      'securbank',
+      this.env.siteName,
       'page-by-slug',
       queryVariables
     ).pipe(
@@ -125,7 +128,7 @@ export class AemHeadlessService {
    */
   addAemHost(url: string): string {
     if (url && url.startsWith('/')) {
-      return new URL(url, environment.hostUri).toString();
+      return new URL(url, this.env.hostUri).toString();
     }
     return url;
   }

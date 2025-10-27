@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "start:https": "ng serve --ssl true --ssl-cert ssl/cert.pem --ssl-key ssl/key.pem",
-    "build": "ng build",
+    "start": "node scripts/generate-env.js && ng serve",
+    "start:https": "node scripts/generate-env.js && ng serve --ssl true --ssl-cert ssl/cert.pem --ssl-key ssl/key.pem",
+    "build": "node scripts/generate-env.js && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -23,10 +23,12 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/cdk": "^20.2.10",
     "@angular/common": "^20.3.0",
     "@angular/compiler": "^20.3.0",
     "@angular/core": "^20.3.0",
     "@angular/forms": "^20.3.0",
+    "@angular/material": "^20.2.10",
     "@angular/platform-browser": "^20.3.0",
     "@angular/router": "^20.3.0",
     "rxjs": "~7.8.0",
